@@ -1,0 +1,68 @@
+# council-harness example configuration.
+#
+# Copy this to config.yaml (gitignored) and fill in your own endpoints/agents:
+#     cp config.example.yaml config.yaml
+#
+# An agent's `type` selects how it is called:
+#   ollama      - local Ollama server (default)
+#   openai      - any OpenAI-compatible endpoint (Open WebUI, vLLM, OpenAI, ...)
+#   claude_cli  - the `claude` CLI (uses your Claude subscription login; no API key)
+#   codex_cli   - the `codex` CLI (uses your ChatGPT subscription login; no API key)
+#
+# Never put real API keys in this file. Use `api_key_env` and export the token.
+
+agents:
+  # Local model via Ollama
+  - id: local
+    type: ollama
+    model: qwen2.5-coder:7b
+    url: http://localhost:11434
+    timeout: 150
+    max_tokens: 4096
+    num_ctx: 8192
+
+  # Remote model via an OpenAI-compatible gateway (e.g. Open WebUI / vLLM)
+  - id: gateway
+    type: openai
+    model: your-model-name:latest
+    url: http://your-gateway.local:8080/openai
+    api_key_env: COUNCIL_GATEWAY_TOKEN   # export COUNCIL_GATEWAY_TOKEN=...
+    max_tokens: 8192
+
+  # Subscription CLI agent — Claude (no API key; runs `claude -p`)
+  # - id: claude
+  #   type: claude_cli
+  #   model: sonnet            # alias (sonnet/opus) or full model id; optional
+  #   timeout: 240
+
+  # Subscription CLI agent — Codex (no API key; runs `codex exec`)
+  # - id: codex
+  #   type: codex_cli          # omit `model` on a ChatGPT subscription account
+  #   timeout: 240
+
+rounds:
+  max: 5
+  consensus_threshold: 2       # how many agents must align to reach consensus
+
+# Optional: skip the holistic review+fix round (contract_parts has its own QA)
+# review_round: true
+
+# Optional writer — transcribes the agreed draft into the final output.
+# A plain (ollama/openai) writer returns text; the harness writes the files.
+writer:
+  id: writer
+  type: ollama
+  model: qwen2.5-coder:7b
+  url: http://localhost:11434
+
+# A CLI writer with `can_write: true` writes files itself when run with
+# --output-dir (claude_cli uses --permission-mode acceptEdits; codex_cli uses
+# -s workspace-write). If it produces no files, the harness falls back to
+# parsing the council draft. Give CLI writers a generous timeout.
+#
+# writer:
+#   id: claude
+#   type: claude_cli
+#   model: sonnet
+#   can_write: true
+#   timeout: 300

@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Local Claude Code settings (may contain machine paths / tokens)
+.claude/settings.local.json
+
+# Local config with real endpoints/tokens — copy from config.example.yaml
+config.yaml
+config.local.yaml
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
