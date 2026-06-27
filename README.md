@@ -35,19 +35,19 @@ authenticate via your existing subscription login — no API key.
 ## Usage
 
 ```bash
-council "implement a token-bucket rate limiter for a FastAPI app"
+council run "implement a token-bucket rate limiter for a FastAPI app"
 
 # custom config file
-council "implement a binary search tree" --config my-council.yaml
+council run "implement a binary search tree" --config my-council.yaml
 
 # write multi-file output to a directory
-council "build a small CLI package with tests" --output-dir ./out
+council run "build a small CLI package with tests" --output-dir ./out
 
 # run the contract_parts pipeline (design → assign → implement → review → merge)
-council "build a JWT auth module" --mode contract_parts --output-dir ./out
+council run "build a JWT auth module" --mode contract_parts --output-dir ./out
 
 # live dashboard
-council "implement a JWT auth middleware" --dashboard
+council run "implement a JWT auth middleware" --dashboard
 
 # onboard a new agent
 council agent add --id llama --model llama3 --url http://localhost:11434 --type ollama

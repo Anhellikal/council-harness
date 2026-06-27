@@ -6,7 +6,7 @@ Everything a contributor needs to understand this codebase without reading every
 
 ## What this project is
 
-A CLI tool (`council "<task>"`) that coordinates N LLM agents — local models and subscription-based CLI agents — to collaboratively produce a coding implementation. Agents propose, discuss, and converge over multiple rounds. The final agreed draft optionally passes through a writer agent for clean output (or is written straight to disk by a write-enabled CLI writer).
+A CLI tool (`council run "<task>"`) that coordinates N LLM agents — local models and subscription-based CLI agents — to collaboratively produce a coding implementation. Agents propose, discuss, and converge over multiple rounds. The final agreed draft optionally passes through a writer agent for clean output (or is written straight to disk by a write-enabled CLI writer).
 
 ---
 

@@ -13,6 +13,9 @@ venv/
 config.yaml
 config.local.yaml
 
+# Local secrets sourced into the shell (e.g. for VHS demo recording)
+.env.local
+
 # Editor / OS
 .DS_Store
 .idea/
