@@ -4,6 +4,25 @@ A CLI tool that sends a coding task to a council of LLM agents — local models 
 
 > **Note on scope.** This is an experiment in multi-agent code generation. The council converges and produces working drafts, but multi-agent output reliably benefits from a short human review pass — treat the result as a strong starting point, not a finished artifact. See [FINDINGS.md](FINDINGS.md) for honest, observational notes on where local models and the council structure hold up and where they don't.
 
+## Demo
+
+A full run — agents propose in parallel, debate over rounds, and converge on one implementation:
+
+![council run demo](demo/council.gif)
+
+**Rollcall** pings every configured agent first, so the council runs with whoever responded:
+
+![rollcall demo](demo/rollcall.gif)
+
+### Walkthrough
+
+| | |
+|---|---|
+| **1. Round 1** — every active agent thinks independently | ![round 1](demo/council-run-0.png) |
+| **2. Discussion** — agents revise or adopt each other's drafts | ![discussion](demo/council-run-1.png) |
+| **3. Convergence + review** — the council aligns on one draft, then agents bug-hunt and apply fixes | ![convergence](demo/council-run-2.png) |
+| **4. Final implementation** — the agreed code | ![final](demo/council-run-3.png) |
+
 ## What it does
 
 1. **Rollcall** — pings every configured agent and records who responds. The council runs with whoever showed up; missing agents are printed clearly before round 1.
